@@ -27,7 +27,7 @@ export interface ICKEditorContext {
 
 declare global {
   interface Window {
-    OPBalloonEditor:ICKEditorStatic;
+    OPConstrainedEditor:ICKEditorStatic;
     OPClassicEditor:ICKEditorStatic;
   }
 }
@@ -42,13 +42,14 @@ export class CKEditorSetupService {
    * Pass a ICKEditorContext object that will be used to decide active plugins.
    *
    *
-   * @param {"classic" | "balloon"} type
+   * @param {"full" | "constrained"} type
    * @param {HTMLElement} wrapper
    * @param {ICKEditorContext} context
    * @returns {Promise<ICKEditorInstance>}
    */
- public create(type:'classic'|'balloon', wrapper:HTMLElement, context:ICKEditorContext) {
-   const editor = type === 'balloon' ? window.OPBalloonEditor : window.OPClassicEditor;
+ public create(type:'full'|'constrained', wrapper:HTMLElement, context:ICKEditorContext) {
+   const editor = type === 'constrained' ? window.OPConstrainedEditor : window.OPClassicEditor;
+   wrapper.classList.add(`ckeditor-type-${type}`);
 
    return editor
      .createCustomized(wrapper, {

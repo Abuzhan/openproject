@@ -87,7 +87,7 @@ export class OpCkeditorFormComponent implements OnInit {
                       previewContext: this.previewContext };
 
     const editorPromise = this.ckEditorSetup
-      .create('classic',
+      .create('full',
               wrapper[0],
               context)
       .then(this.setup.bind(this));
